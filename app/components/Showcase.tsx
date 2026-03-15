@@ -9,12 +9,21 @@ const showcaseVariants = [
       "My Mom agent is scarier than my actual mom. I cleaned my entire apartment in 20 minutes.",
     author: "procrastinator_supreme",
     image: "/mom.png",
+    overlayWidth: "w-[92%]",
   },
   {
     quote:
       "Boss mode called me out so hard I finished my slides before lunch. Low-key terrifying, but it works.",
     author: "deck_deadline_survivor",
     image: "/boss.png",
+    overlayWidth: "w-[92%]",
+  },
+  {
+    quote:
+      "The Theorist told me Big Sofa profits every hour I skip the gym. I haven\u2019t missed a day since.",
+    author: "big_sofa_truther",
+    image: "/theorist.png",
+    overlayWidth: "w-[88%]",
   },
 ];
 
@@ -110,7 +119,7 @@ export default function Showcase() {
                 initial={{ opacity: 0, y: 80 }}
               animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: [0, 0, 0.2, 1] }}
-              className="absolute z-10 bottom-10 left-1/2 -translate-x-1/2 w-[92%] h-auto"
+              className={`absolute z-10 bottom-10 left-1/2 -translate-x-1/2 ${variant.overlayWidth} object-cover object-bottom h-auto`}
             />
           </div>
         </motion.div>
