@@ -48,8 +48,9 @@ export default function TermsPage() {
             <p className="mt-3">
               AI-generated messages are created using OpenAI&apos;s GPT-4o-mini.
               All notification content is generated dynamically and may vary.
-              Notifications are scheduled locally on your device — we do not use
-              remote push notification servers.
+              Notifications are delivered via Apple Push Notification Service
+              (APNs) — your device token and timezone are stored on our server
+              to schedule and deliver messages at the right time.
             </p>
           </section>
 

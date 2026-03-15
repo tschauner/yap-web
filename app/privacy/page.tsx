@@ -61,6 +61,18 @@ export default function PrivacyPage() {
                 <strong className="text-white">Pro status</strong> — Whether
                 your device has an active Pro purchase, for feature gating.
               </li>
+              <li>
+                <strong className="text-white">APNs device token</strong> — When
+                you grant notification permissions, your Apple Push
+                Notification Service (APNs) device token is stored on our
+                server so we can deliver scheduled notifications to your
+                device.
+              </li>
+              <li>
+                <strong className="text-white">Timezone</strong> — Your
+                device&apos;s timezone is stored to respect quiet hours and
+                deliver notifications at appropriate local times.
+              </li>
             </ul>
           </section>
 
@@ -105,7 +117,7 @@ export default function PrivacyPage() {
             <h2 className="text-xl font-semibold text-white mb-3">
               5. Third-party services
             </h2>
-            <p>We use two third-party services:</p>
+            <p>We use the following third-party services:</p>
             <ul className="list-disc list-inside mt-3 space-y-2">
               <li>
                 <strong className="text-white">Supabase</strong> (database &amp;
@@ -127,6 +139,18 @@ export default function PrivacyPage() {
                 </a>
                 .
               </li>
+              <li>
+                <strong className="text-white">Apple Push Notification Service (APNs)</strong>{" "}
+                — We use APNs to deliver scheduled notifications to your
+                device. Your APNs device token is sent to Apple&apos;s servers
+                to route notifications. No mission content or personal data is
+                shared with Apple beyond what is required for delivery.
+                Subject to Apple&apos;s{" "}
+                <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer" className="text-white underline underline-offset-2 hover:text-white/70 transition-colors">
+                  privacy policy
+                </a>
+                .
+              </li>
             </ul>
             <p className="mt-3">
               We do not use any analytics SDKs, advertising networks, crash
@@ -139,10 +163,24 @@ export default function PrivacyPage() {
               6. Notifications
             </h2>
             <p>
-              All notifications in Yap are <strong className="text-white">local notifications</strong>{" "}
-              scheduled on your device. We do not use Apple Push Notification
-              Service (APNs), Firebase Cloud Messaging, or any remote push
-              infrastructure. Your notifications never pass through our servers.
+              Yap uses <strong className="text-white">remote push notifications</strong>{" "}
+              delivered via Apple Push Notification Service (APNs). When you
+              start a mission, AI-generated notification messages are created
+              on our server and scheduled for delivery at specific times.
+              These notifications are sent from our server through APNs to
+              your device.
+            </p>
+            <p className="mt-3">
+              To enable this, we store your APNs device token and timezone
+              on our server. Notification content (the AI-generated messages)
+              is stored server-side until delivered. We respect your quiet
+              hours settings by checking your device&apos;s timezone before
+              sending.
+            </p>
+            <p className="mt-3">
+              You can disable notifications at any time through your
+              device&apos;s Settings app. If you revoke notification
+              permissions, no further push notifications will be delivered.
             </p>
           </section>
 
