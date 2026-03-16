@@ -10,7 +10,7 @@ const faqs = [
   },
   {
     q: "How does the free plan work?",
-    a: "You get all 6 base agents with 1 mission per day. AI-powered messages, the leaderboard, and quiet hours are included for everyone.",
+    a: "You get all 6 base agents with 1 mission per day. AI-powered messages and the leaderboard are included for everyone.",
   },
   {
     q: "What does Pro unlock?",
@@ -25,8 +25,8 @@ const faqs = [
     a: "The mission counts as failed and affects your stats. Your agent won't be happy about it either.",
   },
   {
-    q: "What are quiet hours?",
-    a: "Set a time window where agents won't send notifications. They'll resume bugging you after.",
+    q: "Will I get notifications at night?",
+    a: "Yes. Your agent doesn't sleep. If your mission is active, messages keep coming. That's the point.",
   },
   {
     q: "How do agents differ?",

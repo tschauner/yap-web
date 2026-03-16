@@ -70,7 +70,7 @@ export default function PrivacyPage() {
               </li>
               <li>
                 <strong className="text-white">Timezone</strong> — Your
-                device&apos;s timezone is stored to respect quiet hours and
+                device&apos;s timezone is stored to schedule and
                 deliver notifications at appropriate local times.
               </li>
             </ul>
@@ -173,9 +173,9 @@ export default function PrivacyPage() {
             <p className="mt-3">
               To enable this, we store your APNs device token and timezone
               on our server. Notification content (the AI-generated messages)
-              is stored server-side until delivered. We respect your quiet
-              hours settings by checking your device&apos;s timezone before
-              sending.
+              is stored server-side until delivered. Notifications are sent
+              at scheduled times regardless of time of day while your
+              mission is active.
             </p>
             <p className="mt-3">
               You can disable notifications at any time through your
