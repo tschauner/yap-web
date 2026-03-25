@@ -6,23 +6,23 @@ import { useRef, useState } from "react";
 const faqs = [
   {
     q: "What is Yap?",
-    a: "Yap uses AI agents with unique personalities to motivate you to finish tasks. Pick an agent, describe your mission, set a deadline, and get nagged until you're done.",
+    a: "Yap uses AI agents with unique personalities to motivate you to finish tasks. Pick an agent, describe your mission, set a deadline, and get yapped at until it's done.",
   },
   {
     q: "How does the free plan work?",
-    a: "You get all 6 base agents with 1 mission per day. AI-powered messages and the leaderboard are included for everyone.",
+    a: "You get Mom as your free agent with 1 mission per day. AI-powered messages and the leaderboard are included for everyone.",
   },
   {
     q: "What does Pro unlock?",
-    a: "Pro is a one-time lifetime purchase. You get unlimited daily missions, the Chaos Pack (The Ex, The Theorist, The Colleague), Agent Memory, Custom Roast, custom deadlines, and the ability to extend deadlines by 24 hours. The Legends Pack (Gordon Ramsay, Disappointed Dad, Gym Bro) can be purchased separately.",
-  },
-  {
-    q: "What are agent packs?",
-    a: "There are two special agent packs you can buy. The Chaos Pack includes The Ex, The Theorist, and The Colleague — it's included with Pro. The Legends Pack with Gordon Ramsay, Disappointed Dad, and Gym Bro is a separate one-time purchase.",
+    a: "Pro is a one-time lifetime purchase. You get all 6 Special Agents, unlimited daily missions, Agent Memory, Custom Roast, and the ability to extend deadlines.",
   },
   {
     q: "What happens when I miss a deadline?",
     a: "The mission counts as failed and affects your stats. Your agent won't be happy about it either.",
+  },
+  {
+    q: "Can I extend a deadline?",
+    a: "Pro users can extend a deadline once per mission.",
   },
   {
     q: "Will I get notifications at night?",
@@ -30,7 +30,7 @@ const faqs = [
   },
   {
     q: "How do agents differ?",
-    a: "Each agent has a unique personality, escalation style, and communication tone — from Mom's guilt trips to Drill Sergeant's tough love. Special agents even remember your past missions.",
+    a: "Each agent has a unique personality and communication style — from Mom's guilt trips to Drill Sergeant's tough love. Special agents even remember your past missions.",
   },
 ];
 

@@ -44,7 +44,7 @@ export default function Agents() {
               }`}
             >
               <div
-                className={`w-20 h-20 md:w-[88px] md:h-[88px] rounded-full flex items-center justify-center text-3xl md:text-4xl transition-shadow duration-200 ${
+                className={`w-20 h-20 md:w-[88px] md:h-[88px] rounded-full flex items-center justify-center text-4xl md:text-5xl transition-shadow duration-200 ${
                   selected === i ? "ring-2 ring-offset-2" : ""
                 }`}
                 style={{

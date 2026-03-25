@@ -28,12 +28,10 @@ export default function Footer() {
               The App
             </span>
             <a
-              href="https://apps.apple.com/app/yap/id6738916276"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/#waitlist"
               className="text-sm text-[#888] hover:text-white transition-colors"
             >
-              Download
+              Join Waitlist
             </a>
             <a
               href="mailto:feedback@yap.fail"

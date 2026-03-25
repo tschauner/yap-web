@@ -100,7 +100,7 @@ export default function Showcase() {
           <h3 className="text-[28px] md:text-[36px] font-bold leading-[1.1] tracking-[-0.5px] text-[#0a0a0a] mb-10">
             Pick an agent.<br />
             Set a mission.<br />
-            Get nagged.
+            Get yapped at.
           </h3>
 
           {/* Phone + animated overlay */}

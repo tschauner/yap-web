@@ -84,7 +84,7 @@ export default function TermsPage() {
               Pro is a <strong className="text-white">one-time lifetime purchase</strong>{" "}
               (not a subscription) that unlocks unlimited daily missions, the
               Chaos Pack (3 special agents), Agent Memory, Custom Roast,
-              custom deadlines, and the ability to extend deadlines by 24 hours.
+              custom deadlines, and the ability to extend deadlines.
             </p>
           </section>
 

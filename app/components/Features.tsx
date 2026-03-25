@@ -48,7 +48,7 @@ export default function Features() {
             <h3 className="text-[32px] md:text-[40px] font-bold leading-[1.1] tracking-[-1px] text-white">
               Six agents.<br />
               Six ways to<br />
-              get nagged.
+              get yapped at.
             </h3>
           </motion.div>
 
