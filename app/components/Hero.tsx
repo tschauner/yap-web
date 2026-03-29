@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import WaitlistForm from "./WaitlistForm";
 
 export default function Hero() {
   return (
@@ -50,14 +49,23 @@ export default function Hero() {
       </motion.div>
 
       {/* CTA */}
-      <motion.div
+      <motion.a
+        href="https://apps.apple.com/app/id6761190023"
+        target="_blank"
+        rel="noopener noreferrer"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.6, duration: 0.5 }}
-        className="relative z-10 mb-16 w-full max-w-[320px]"
+        whileHover={{ y: -2 }}
+        whileTap={{ scale: 0.97 }}
+        className="relative z-10 mb-16"
       >
-        <WaitlistForm buttonLabel="Notify Me" dark={true} className="max-w-[600px]" />
-      </motion.div>
+        <img
+          src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
+          alt="Download on the App Store"
+          className="h-[54px] w-auto"
+        />
+      </motion.a>
     </section>
   );
 }

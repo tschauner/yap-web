@@ -10,11 +10,15 @@ const faqs = [
   },
   {
     q: "How does the free plan work?",
-    a: "You get Mom as your free agent with 1 mission per day. AI-powered messages and the leaderboard are included for everyone.",
+    a: "You get 6 agents for free - Mom, Best Friend, Boss, Drill Sergeant, Therapist, and Grandma - with 1 mission per day. AI-powered messages and the leaderboard are included for everyone.",
   },
   {
     q: "What does Pro unlock?",
-    a: "Pro is a one-time lifetime purchase. You get all 6 Special Agents, unlimited daily missions, Agent Memory, Custom Roast, and the ability to extend deadlines.",
+    a: "Pro unlocks 6 special agents, unlimited daily missions, a custom deadline per mission, deadline extension, and a Custom Roast in Settings.",
+  },
+  {
+    q: "What are special agents?",
+    a: "Ex, Conspiracy Theorist, Passive-Aggressive Colleague, Chef, Disappointed Dad, and Gym Bro. They remember your past failures and bring them up when you least want to hear it.",
   },
   {
     q: "What happens when I miss a deadline?",
@@ -26,11 +30,11 @@ const faqs = [
   },
   {
     q: "Will I get notifications at night?",
-    a: "Yes. Your agent doesn't sleep. If your mission is active, messages keep coming. That's the point.",
+    a: "By default, Quiet Hours are active between 22:00 and 8:00 - no notifications during that window. You can change the hours or turn them off entirely in Settings.",
   },
   {
     q: "How do agents differ?",
-    a: "Each agent has a unique personality and communication style — from Mom's guilt trips to Drill Sergeant's tough love. Special agents even remember your past missions.",
+    a: "Each agent has a unique personality and communication style - from Mom's guilt trips to Drill Sergeant's tough love. Special agents even remember your past missions.",
   },
 ];
 

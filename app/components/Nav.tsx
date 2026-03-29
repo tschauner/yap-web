@@ -37,11 +37,12 @@ export default function Nav() {
         )}
 
         <a
-          href="#waitlist"
-          onClick={(e) => { e.preventDefault(); document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' }); }}
+          href="https://apps.apple.com/app/id6761190023"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-sm font-semibold px-5 py-2 rounded-full bg-white text-[#0a0a0a] hover:opacity-85 transition-opacity"
         >
-          Get Notified
+          Download
         </a>
       </div>
     </motion.nav>

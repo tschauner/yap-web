@@ -28,13 +28,17 @@ export default function Footer() {
               The App
             </span>
             <a
-              href="/#waitlist"
+              href="https://apps.apple.com/app/id6761190023"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-[#888] hover:text-white transition-colors"
             >
-              Join Waitlist
+              Download
             </a>
             <a
-              href="mailto:feedback@yap.fail"
+              href="https://yapapp.userjot.com/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-[#888] hover:text-white transition-colors"
             >
               Feedback
@@ -78,28 +82,12 @@ export default function Footer() {
               The Cool
             </span>
             <a
-              href="https://x.com/yapdotfail"
+              href="https://x.com/yapAgency"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-[#888] hover:text-white transition-colors"
             >
-              X
-            </a>
-            <a
-              href="https://instagram.com/yap.fail"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-[#888] hover:text-white transition-colors"
-            >
-              Instagram
-            </a>
-            <a
-              href="https://tiktok.com/@yap.fail"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-[#888] hover:text-white transition-colors"
-            >
-              TikTok
+              X / Twitter
             </a>
           </div>
         </div>
