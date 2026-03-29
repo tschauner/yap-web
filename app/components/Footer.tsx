@@ -36,7 +36,7 @@ export default function Footer() {
               Download
             </a>
             <a
-              href="https://yapapp.userjot.com/"
+              href="https://discord.gg/eK6hUZKs"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-[#888] hover:text-white transition-colors"
