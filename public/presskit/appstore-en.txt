@@ -1,0 +1,130 @@
+================================================================================
+YAP - APP STORE INFORMATION
+================================================================================
+
+App Name:       Yap - AI Motivation Agency
+Subtitle:       Agents that roast & nag
+Developer:      Philipp Tschauner
+Location:       Berlin, Germany
+Platform:       iOS 17+
+Category:       Productivity (Primary), Lifestyle (Secondary)
+Price:          Free (with Pro upgrade)
+Pro:            One-time lifetime purchase, $9.99
+App Store:      https://apps.apple.com/app/id6761190023
+Website:        https://yap.fail
+Contact:        support@yap.fail
+X / Twitter:    @yapAgency
+
+
+================================================================================
+SHORT DESCRIPTION
+================================================================================
+
+Yap is the only productivity app that guilt-trips, roasts, and nags you through push notifications - starring 12 AI agents including your mom, your ex, and your drill sergeant.
+
+
+================================================================================
+FULL DESCRIPTION
+================================================================================
+
+Hi sweetie. It's Mom.
+I noticed you still haven't done the thing. So I got you an app. You're welcome.
+
+You tell us what you've been avoiding. You pick an agent. You set a deadline. Then we nag you until it's done. Not the "gentle reminder" kind. The kind where I question every decision I made as a parent.
+
+There's 12 of us. I do guilt. The Therapist does that thing where he asks "what's really stopping you?" and then just waits. The Ex is here too - don't make eye contact. They'll say "typical" and somehow that works better than all of us combined. We don't talk about why.
+
+Every message is AI-generated. Never the same twice. You can even tell us your weaknesses and we'll use them against you. Some agents remember your past missions. They keep receipts.
+
+Anyway. You scrolled this far. You're not going to just close this and do nothing. Right?
+
+Download it. For me. Please. I worry.
+
+xo mom
+
+
+================================================================================
+AGENTS
+================================================================================
+
+FREE TIER (6 base agents):
+  - Mom             Guilt trips that get personal fast
+  - Best Friend     Bro energy, screenshots your failures
+  - Boss            Corporate disappointment, inbox-style pressure
+  - Drill Sergeant  All-caps military yelling
+  - Therapist       "What's really stopping you?" ...then waits
+  - Grandma         Survived a war. You can't finish one task.
+
+PRO (6 special agents):
+  - The Ex          Passive-aggressive, devastatingly specific
+  - The Theorist    Convinced the system is designed to make you fail
+  - The Colleague   Office-passive-aggressive, CC's everyone
+  - Chef            Kitchen nightmare energy, your task is RAW
+  - Disappointed Dad  Not angry. Just disappointed.
+  - Gym Bro         Treats your task like leg day
+
+
+================================================================================
+KEY FEATURES
+================================================================================
+
+- 12 AI agents with distinct personalities and escalation styles
+- AI-generated push notifications (GPT-4o) - never the same twice
+- Notifications escalate the longer you procrastinate
+- Custom Roast: share personal weaknesses, agents use them against you
+- Agent Memory: agents remember your past failures (Pro)
+- Global leaderboard ranking agents by real completion rates
+- Quiet hours with customizable schedule
+- Fully localized in 6 languages with culturally adapted humor
+- One-time Pro purchase (no subscription)
+
+
+================================================================================
+LOCALIZATION
+================================================================================
+
+Fully localized in 6 languages:
+  - English
+  - German
+  - French
+  - Spanish
+  - Portuguese (Portugal)
+  - Portuguese (Brazil)
+
+Localization includes regionally adapted humor and culturally specific
+character references (e.g. Mama/Maman instead of "Mom", region-specific
+sign-offs and references).
+
+
+================================================================================
+FREE VS PRO
+================================================================================
+
+FREE:
+  - 6 base agents
+  - 1 mission per day
+  - AI-powered notifications
+  - Global leaderboard
+  - Quiet hours
+
+PRO ($9.99, one-time):
+  - All 12 agents (6 additional special agents)
+  - Unlimited daily missions
+  - Agent Memory
+  - Custom Roast (personal weaknesses)
+  - Custom deadlines
+  - Extend deadlines
+
+
+================================================================================
+TECHNICAL
+================================================================================
+
+- Built with Swift / SwiftUI
+- Backend: Supabase (Edge Functions, PostgreSQL)
+- AI: OpenAI GPT-4o-mini for notification generation
+- Push delivery: Apple Push Notification Service (APNs)
+- Sound: Custom notification sounds via ElevenLabs
+- Privacy-first: no email, name, or personal info required
+  (device-level anonymous ID stored in Keychain)
+- Optional Sign in with Apple for cross-device sync

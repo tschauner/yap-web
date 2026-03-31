@@ -89,6 +89,12 @@ export default function Footer() {
             >
               X / Twitter
             </a>
+            <Link
+              href="/presskit"
+              className="text-sm text-[#888] hover:text-white transition-colors"
+            >
+              Press Kit
+            </Link>
           </div>
         </div>
 

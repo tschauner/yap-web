@@ -1,0 +1,103 @@
+================================================================================
+THE STORY BEHIND YAP
+================================================================================
+
+
+THE SHORT VERSION
+-----------------
+
+Yap is the productivity app that replaced motivational quotes with AI-generated guilt trips. 12 agents - including your mom, your ex, and a drill sergeant - send escalating push notifications until you finish your task. Or give up. They'll judge you either way.
+
+
+THE LONG VERSION
+-----------------
+
+Push notifications have always been the most underrated feature on a phone. Not the marketing spam kind. The kind that actually makes you feel something.
+
+It started with Yo.
+
+Around 2010-2011, there was an app called Yo. All it did was send a push notification that said "Yo" to someone. That was the entire app. One button. One word. No feed, no content, no algorithm. Just a push notification from a real person. It raised $1.5M, made headlines everywhere, and most people thought it was a joke.
+
+I thought it was the most interesting app I'd ever seen.
+
+Yo understood something most apps still don't: the lock screen is the most intimate space on your phone. It's where you look first. It's where things land that you didn't ask for - and those are the things that actually get your attention. Nobody scrolls through a productivity app at 3pm on a Sunday. But everyone reads a push notification.
+
+That idea never left.
+
+
+FROM HEY TO YAP
+-----------------
+
+A few years later, I built an app called hey - a friendship reminder app. You add your closest friends, and the app nudges you when you haven't reached out in a while.
+
+hey was the first time I gave personality to notifications. Instead of "Reminder: Contact Sarah", it was sarcastic. Passive-aggressive. Your mom's tone. Your therapist's tone. Your gen-z friend's tone. Users could choose from 8 different message tones - playful, sarcastic, passive-aggressive, bestie, gen-z, motivational, boomer, therapist - and the notifications completely changed character.
+
+That was the moment I realized: people don't respond to information. They respond to personality. A notification that says "You haven't texted Sarah in 14 days" gets ignored. A notification that says "Not to be dramatic, but Sarah might forget what you look like soon" gets a laugh - and a text.
+
+hey proved the format. Characters in push notifications work. People pick the tone that psychologically fits them, and they actually follow through.
+
+Yap takes that idea and builds an entire app around it.
+
+
+WHAT MAKES YAP DIFFERENT
+-----------------
+
+The productivity category has two modes: cheerful habit trackers that celebrate you for logging a glass of water, and minimalist to-do list apps that nobody opens after a week. Both assume the user is motivated. Both fail when they're not.
+
+Yap doesn't assume motivation. It manufactures pressure.
+
+You set a task, pick a deadline, and choose one of 12 AI agents to hold you accountable. The notifications are generated fresh by GPT-4o - never the same message twice. They escalate the longer the task goes unfinished. You can even share your personal weaknesses, and the agents will use them against you.
+
+The agents aren't templates. They're characters:
+
+  - Mom starts with "the apartment won't clean itself" and ends
+    with "I'm coming over unannounced. Right now."
+  - The Ex says "typical" and somehow that's more motivating than
+    any gentle reminder has ever been.
+  - The Drill Sergeant doesn't ask. He tells.
+  - Grandma survived a war. You can't finish one task.
+  - The Therapist asks "what's really stopping you?" and just... waits.
+  - The Theorist is convinced the system is designed to make you fail -
+    and uses that to motivate you.
+
+Every agent has a different escalation curve, a different emotional register, and a different reason people pick them. Some users want guilt. Some want passive-aggression. Some want someone to just yell at them. The right pressure depends on who you are.
+
+
+THE LEADERBOARD FLIP
+-----------------
+
+The most counterintuitive feature in Yap is the global leaderboard - but it doesn't rank users. It ranks agents.
+
+Every agent has a real completion rate based on actual user data. When a user fails a mission, the narrative isn't "you gave up." It's "your agent didn't deliver." This removes shame and replaces it with humor.
+
+Users don't just pick agents by personality anymore. They pick them because they want their agent to win. It turns accountability from a personal burden into a spectator sport.
+
+
+THE APP THAT COMES TO YOU
+-----------------
+
+Most productivity apps require you to open them. That's already a problem. If you had the discipline to open a productivity app, you probably don't need one.
+
+Yap lives entirely in push notifications. The app comes to you. You feel the pressure on your lock screen, in your notification center, while you're scrolling Twitter. You don't have to remember to be productive. The agents remember for you.
+
+That's the core insight from Yo, carried through hey, and fully realized in Yap: the lock screen is the product.
+
+
+ABOUT THE DEVELOPER
+-----------------
+
+Yap is built by Philipp Tschauner, an independent developer based in Berlin. He's shipped multiple iOS apps over the past few years - including hey (friendship reminders with personality-driven push notifications) and Five Things (a daily news app).
+
+Push notifications have been a recurring obsession across all his apps. "Most developers treat push notifications as a marketing tool - something to re-engage users. I've always seen them as the actual product. The notification IS the experience. Everything else is just settings."
+
+Yap is a solo project - design, development, backend, marketing, AI integration, and localization in 6 languages. Built with Swift/SwiftUI, powered by Supabase and OpenAI.
+
+
+CONTACT
+-----------------
+
+Philipp Tschauner
+Berlin, Germany
+support@yap.fail
+https://yap.fail
+@yapAgency (X/Twitter)
