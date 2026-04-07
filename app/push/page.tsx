@@ -311,7 +311,7 @@ function PushGenerator() {
             <>
               {/* Ghost 1 — closer behind */}
               <div
-                className="absolute inset-x-0 bottom-0 rounded-[32px] h-full"
+                className="absolute inset-x-0 bottom-0 rounded-[42px] h-full"
                 style={{
                   background: "rgba(255, 255, 255, 0.12)",
                   backdropFilter: "blur(60px)",
@@ -324,7 +324,7 @@ function PushGenerator() {
               />
               {/* Ghost 2 — furthest back */}
               <div
-                className="absolute inset-x-0 bottom-0 rounded-[32px] h-full"
+                className="absolute inset-x-0 bottom-0 rounded-[42px] h-full"
                 style={{
                   background: "rgba(255, 255, 255, 0.08)",
                   backdropFilter: "blur(60px)",
@@ -342,13 +342,13 @@ function PushGenerator() {
           {isRemote ? (
             /* ── Remote Push: large round avatar + small app icon badge bottom-right ── */
             <div
-              className="relative rounded-[32px] px-4 py-3.5 flex gap-4 items-center"
+              className="relative rounded-[42px] px-4 py-3.5 flex gap-4 items-center"
               style={{
                 background: "rgba(255, 255, 255, 0.18)",
                 backdropFilter: "blur(60px)",
                 WebkitBackdropFilter: "blur(60px)",
                 boxShadow: "inset 0 0.5px 0 rgba(255,255,255,0.12)",
-                border: "0.5px solid rgba(255,255,255,0.12)",
+                border: "2px solid rgba(255,255,255,0.12)",
               }}
             >
               {/* Avatar with app icon badge */}
@@ -428,13 +428,13 @@ function PushGenerator() {
           ) : (
             /* ── Local Push: only the app icon ── */
             <div
-              className="relative rounded-[32px] px-4 py-3.5 flex gap-4 items-center"
+              className="relative rounded-[42px] px-4 py-3.5 flex gap-4 items-center"
               style={{
                 background: "rgba(255, 255, 255, 0.18)",
                 backdropFilter: "blur(60px)",
                 WebkitBackdropFilter: "blur(60px)",
                 boxShadow: "inset 0 0.5px 0 rgba(255,255,255,0.12)",
-                border: "0.5px solid rgba(255,255,255,0.12)",
+                border: "2px solid rgba(255,255,255,0.12)",
               }}
             >
               {isApiMode ? (
