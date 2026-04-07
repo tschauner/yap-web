@@ -177,8 +177,8 @@ function PushGenerator() {
   const initialType = qType === "local" ? "local" as const : "remote" as const;
   const initialStack = qStack === "true" || qStack === "1";
 
-  const [avatarUrl, setAvatarUrl] = useState<string | null>(qAvatar ?? null);
-  const [appIconUrl, setAppIconUrl] = useState<string | null>(qIcon ?? null);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(qAvatar ?? "/mom.png");
+  const [appIconUrl, setAppIconUrl] = useState<string | null>(qIcon ?? "/appIcon.png");
   const avatarInputRef = useRef<HTMLInputElement>(null);
   const appIconInputRef = useRef<HTMLInputElement>(null);
 
