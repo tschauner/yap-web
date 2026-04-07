@@ -166,6 +166,14 @@ function PushGenerator() {
   const qAvatar = searchParams.get("avatar");
   const qIcon = searchParams.get("icon");
 
+  // Available agent avatars — shorthand names resolve to /agents/<name>.png
+  // mom, dad, boss, ex, drill, grandma, therapist, theorist, ramsay, gymbro, bestfriend, colleague
+  const resolveAvatar = (v: string | null, fallback: string) => {
+    if (!v) return fallback;
+    if (v.startsWith("/") || v.startsWith("http")) return v;
+    return `/agents/${v}.png`;
+  };
+
   const [title, setTitle] = useState(qTitle ?? "Mom");
   const [body, setBody] = useState(
     qBody ?? "36 HOURS of labor... no epidural... and you can't even pick up a sponge... xo Mom"
@@ -177,8 +185,8 @@ function PushGenerator() {
   const initialType = qType === "local" ? "local" as const : "remote" as const;
   const initialStack = qStack === "true" || qStack === "1";
 
-  const [avatarUrl, setAvatarUrl] = useState<string | null>(qAvatar ?? "/agents/mom.png");
-  const [appIconUrl, setAppIconUrl] = useState<string | null>(qIcon ?? "/appIcon.png");
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(resolveAvatar(qAvatar, "/agents/mom.png"));
+  const [appIconUrl, setAppIconUrl] = useState<string | null>(resolveAvatar(qIcon, "/appIcon.png"));
   const avatarInputRef = useRef<HTMLInputElement>(null);
   const appIconInputRef = useRef<HTMLInputElement>(null);
 
