@@ -305,13 +305,13 @@ function PushGenerator() {
         )}
 
         {/* Stack wrapper — holds ghost layers + main notification */}
-        <div className="relative w-[85%] max-w-[560px]" style={{ marginBottom: stacked ? 16 : 0 }}>
+        <div className="relative w-[90%]" style={{ marginBottom: stacked ? 16 : 0 }}>
           {/* Ghost layers (behind, only when stacked) */}
           {stacked && (
             <>
               {/* Ghost 1 — closer behind */}
               <div
-                className="absolute inset-x-0 bottom-0 rounded-[28px] h-full"
+                className="absolute inset-x-0 bottom-0 rounded-[32px] h-full"
                 style={{
                   background: "rgba(255, 255, 255, 0.12)",
                   backdropFilter: "blur(60px)",
@@ -324,7 +324,7 @@ function PushGenerator() {
               />
               {/* Ghost 2 — furthest back */}
               <div
-                className="absolute inset-x-0 bottom-0 rounded-[28px] h-full"
+                className="absolute inset-x-0 bottom-0 rounded-[32px] h-full"
                 style={{
                   background: "rgba(255, 255, 255, 0.08)",
                   backdropFilter: "blur(60px)",
@@ -342,7 +342,7 @@ function PushGenerator() {
           {isRemote ? (
             /* ── Remote Push: large round avatar + small app icon badge bottom-right ── */
             <div
-              className="relative rounded-[28px] px-4 py-3.5 flex gap-3.5 items-center"
+              className="relative rounded-[32px] px-4 py-3.5 flex gap-4 items-center"
               style={{
                 background: "rgba(255, 255, 255, 0.18)",
                 backdropFilter: "blur(60px)",
@@ -355,7 +355,7 @@ function PushGenerator() {
               <div className="relative flex-shrink-0">
                 {/* Large round avatar (sender) */}
                 {isApiMode ? (
-                  <div className="w-[52px] h-[52px] rounded-full flex items-center justify-center overflow-hidden bg-white/10">
+                  <div className="w-[70px] h-[70px] rounded-full flex items-center justify-center overflow-hidden bg-white/10">
                     {avatarUrl ? (
                       <img src={avatarUrl} alt="avatar" className="w-full h-full object-cover" />
                     ) : (
@@ -365,7 +365,7 @@ function PushGenerator() {
                 ) : (
                   <button
                     onClick={() => avatarInputRef.current?.click()}
-                    className="w-[52px] h-[52px] rounded-full flex items-center justify-center overflow-hidden cursor-pointer hover:opacity-80 transition bg-white/10"
+                    className="w-[70px] h-[70px] rounded-full flex items-center justify-center overflow-hidden cursor-pointer hover:opacity-80 transition bg-white/10"
                   >
                     {avatarUrl ? (
                       <img src={avatarUrl} alt="avatar" className="w-full h-full object-cover" />
@@ -377,7 +377,7 @@ function PushGenerator() {
                 {/* Small app icon badge — bottom right */}
                 {isApiMode ? (
                   <div
-                    className="absolute -bottom-1 -right-1 w-[22px] h-[22px] rounded-[7px] flex items-center justify-center overflow-hidden bg-white/15"
+                    className="absolute -bottom-1 -right-1 w-[26px] h-[26px] rounded-[8px] flex items-center justify-center overflow-hidden bg-white/15"
                     style={{ boxShadow: "inset 1px 1px 1px rgba(255,255,255,0.35), inset -0.5px -0.5px 1px rgba(0,0,0,0.15)" }}
                   >
                     {appIconUrl ? (
@@ -389,7 +389,7 @@ function PushGenerator() {
                 ) : (
                   <button
                     onClick={() => appIconInputRef.current?.click()}
-                    className="absolute -bottom-1 -right-1 w-[22px] h-[22px] rounded-[7px] flex items-center justify-center overflow-hidden cursor-pointer hover:opacity-80 transition bg-white/15"
+                    className="absolute -bottom-1 -right-1 w-[26px] h-[26px] rounded-[8px] flex items-center justify-center overflow-hidden cursor-pointer hover:opacity-80 transition bg-white/15"
                     style={{ boxShadow: "inset 1px 1px 1px rgba(255,255,255,0.35), inset -0.5px -0.5px 1px rgba(0,0,0,0.15)" }}
                   >
                     {appIconUrl ? (
@@ -406,13 +406,13 @@ function PushGenerator() {
                   <Text
                     value={title}
                     onChange={setTitle}
-                    className="text-[17px] text-white leading-snug"
+                    className="text-[24px] text-white leading-snug"
                     style={{ fontWeight: 600 }}
                   />
                   <Text
                     value={timeAgo}
                     onChange={setTimeAgo}
-                    className="text-[17px] flex-shrink-0"
+                    className="text-[24px] flex-shrink-0"
                     style={{ color: "rgba(255,255,255,0.48)", mixBlendMode: "plus-lighter" } as React.CSSProperties}
                   />
                 </div>
@@ -420,7 +420,7 @@ function PushGenerator() {
                   value={body}
                   onChange={setBody}
                   tag="p"
-                  className="text-[17px] text-white/85 leading-snug block"
+                  className="text-[24px] text-white leading-snug block"
                   style={{ fontWeight: 400 }}
                 />
               </div>
@@ -428,7 +428,7 @@ function PushGenerator() {
           ) : (
             /* ── Local Push: only the app icon ── */
             <div
-              className="relative rounded-[28px] px-4 py-3.5 flex gap-3.5 items-center"
+              className="relative rounded-[32px] px-4 py-3.5 flex gap-4 items-center"
               style={{
                 background: "rgba(255, 255, 255, 0.18)",
                 backdropFilter: "blur(60px)",
@@ -439,7 +439,7 @@ function PushGenerator() {
             >
               {isApiMode ? (
                 <div
-                  className="w-[50px] h-[50px] rounded-[15px] flex items-center justify-center flex-shrink-0 overflow-hidden bg-white/10"
+                  className="w-[64px] h-[64px] rounded-[19px] flex items-center justify-center flex-shrink-0 overflow-hidden bg-white/10"
                   style={{ boxShadow: "inset 1.5px 1.5px 2px rgba(255,255,255,0.35), inset -1px -1px 2px rgba(0,0,0,0.15)" }}
                 >
                   {appIconUrl ? (
@@ -451,7 +451,7 @@ function PushGenerator() {
               ) : (
                 <button
                   onClick={() => appIconInputRef.current?.click()}
-                  className="w-[50px] h-[50px] rounded-[15px] flex items-center justify-center flex-shrink-0 overflow-hidden cursor-pointer hover:opacity-80 transition bg-white/10"
+                  className="w-[64px] h-[64px] rounded-[19px] flex items-center justify-center flex-shrink-0 overflow-hidden cursor-pointer hover:opacity-80 transition bg-white/10"
                   style={{ boxShadow: "inset 1.5px 1.5px 2px rgba(255,255,255,0.35), inset -1px -1px 2px rgba(0,0,0,0.15)" }}
                 >
                   {appIconUrl ? (
@@ -467,13 +467,13 @@ function PushGenerator() {
                   <Text
                     value={title}
                     onChange={setTitle}
-                    className="text-[17px] text-white leading-snug"
+                    className="text-[24px] text-white leading-snug"
                     style={{ fontWeight: 600 }}
                   />
                   <Text
                     value={timeAgo}
                     onChange={setTimeAgo}
-                    className="text-[17px] flex-shrink-0"
+                    className="text-[24px] flex-shrink-0"
                     style={{ color: "rgba(255,255,255,0.48)", mixBlendMode: "plus-lighter" } as React.CSSProperties}
                   />
                 </div>
@@ -481,7 +481,7 @@ function PushGenerator() {
                   value={body}
                   onChange={setBody}
                   tag="p"
-                  className="text-[17px] text-white/85 leading-snug block"
+                  className="text-[24px] text-white leading-snug block"
                   style={{ fontWeight: 400 }}
                 />
               </div>
