@@ -1,9 +1,33 @@
 import { NextRequest, NextResponse } from "next/server";
 import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
+import { existsSync } from "fs";
 
 // Vercel serverless: max 60s, 1024MB
 export const maxDuration = 30;
+
+// Local Chrome paths by OS
+const LOCAL_CHROME_PATHS = [
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "/usr/bin/google-chrome",
+  "/usr/bin/chromium-browser",
+  "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+];
+
+async function getExecPath(): Promise<string> {
+  // Local dev: use installed Chrome
+  for (const p of LOCAL_CHROME_PATHS) {
+    if (existsSync(p)) return p;
+  }
+  // Production (Vercel): use sparticuz chromium
+  const p = await chromium.executablePath();
+  if (p) return p;
+  throw new Error("No Chrome/Chromium found");
+}
+
+function isVercel(): boolean {
+  return !!process.env.VERCEL;
+}
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
@@ -17,7 +41,7 @@ export async function GET(req: NextRequest) {
     if (val) params.set(key, val);
   }
 
-  // Determine size for the viewport
+  // Determine output size and viewport
   const sizeMap: Record<string, { w: number; h: number }> = {
     twitter: { w: 1200, h: 675 },
     linkedin: { w: 1200, h: 627 },
@@ -26,6 +50,14 @@ export async function GET(req: NextRequest) {
   };
   const sizeKey = (searchParams.get("size") ?? "twitter").toLowerCase();
   const size = sizeMap[sizeKey] ?? sizeMap.twitter;
+
+  // Render at 680px-wide viewport (matches interactive preview layout)
+  // and use deviceScaleFactor to produce the full-resolution output
+  const PREVIEW_MAX_W = 680;
+  const viewScale = Math.min(PREVIEW_MAX_W / size.w, 1);
+  const viewW = Math.round(size.w * viewScale);
+  const viewH = Math.round(size.h * viewScale);
+  const dpr = size.w / viewW;  // e.g. 1200/680 ≈ 1.76
 
   // Resolve base URL
   const baseUrl =
@@ -36,10 +68,12 @@ export async function GET(req: NextRequest) {
 
   let browser;
   try {
+    const execPath = await getExecPath();
+
     browser = await puppeteer.launch({
-      args: chromium.args,
-      defaultViewport: { width: size.w, height: size.h, deviceScaleFactor: 1 },
-      executablePath: await chromium.executablePath(),
+      args: isVercel() ? chromium.args : ["--no-sandbox", "--disable-setuid-sandbox"],
+      defaultViewport: { width: viewW, height: viewH, deviceScaleFactor: dpr },
+      executablePath: execPath,
       headless: true,
     });
 

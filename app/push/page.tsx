@@ -2,7 +2,6 @@
 
 import { useState, useRef, useCallback, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { toPng } from "html-to-image";
 
 // ─── Size presets ───────────────────────────────────────────────────────────────
 
@@ -225,8 +224,9 @@ function PushGenerator() {
 
   const size = SIZE_PRESETS[sizeIdx];
 
-  // In API mode, render at full resolution (1:1). In interactive mode, scale down to 680px max.
-  const displayScale = isApiMode ? 1 : Math.min(680 / size.w, 1);
+  // Both API mode and interactive mode use the same visual scale
+  // so that the layout is identical. Puppeteer uses deviceScaleFactor to upscale.
+  const displayScale = Math.min(680 / size.w, 1);
 
   // Signal to Puppeteer that we're ready
   const [ready, setReady] = useState(false);
@@ -234,34 +234,50 @@ function PushGenerator() {
     setReady(true);
   }, []);
 
+  // Build the current state as query params for the screenshot API
+  const buildApiUrl = useCallback(() => {
+    const params = new URLSearchParams();
+    params.set("title", title);
+    params.set("body", body);
+    params.set("time", timeAgo);
+    params.set("color", activeColor);
+    params.set("size", size.name.toLowerCase());
+    params.set("type", pushStyle);
+    if (stacked) params.set("stack", "true");
+    // Only pass avatar/icon if they're built-in agent paths (not data URIs)
+    if (avatarUrl && !avatarUrl.startsWith("data:")) {
+      const match = avatarUrl.match(/\/agents\/(.+)\.png$/);
+      if (match) params.set("avatar", match[1]);
+    }
+    if (appIconUrl && !appIconUrl.startsWith("data:")) {
+      const match = appIconUrl.match(/\/([^/]+)\.png$/);
+      if (match) params.set("icon", appIconUrl);
+    }
+    return `/api/push?${params.toString()}`;
+  }, [title, body, timeAgo, activeColor, size, pushStyle, stacked, avatarUrl, appIconUrl]);
+
   const handleDownload = useCallback(async () => {
-    if (!captureRef.current) return;
     setIsExporting(true);
     try {
-      const dataUrl = await toPng(captureRef.current, {
-        pixelRatio: size.w / (size.w * displayScale),
-        cacheBust: true,
-      });
+      const res = await fetch(buildApiUrl());
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.download = `push-${size.name.toLowerCase()}-${Date.now()}.png`;
-      link.href = dataUrl;
+      link.href = url;
       link.click();
+      URL.revokeObjectURL(url);
     } catch (err) {
       console.error("Export failed:", err);
     } finally {
       setIsExporting(false);
     }
-  }, [size, displayScale]);
+  }, [size, buildApiUrl]);
 
   const handleCopy = useCallback(async () => {
-    if (!captureRef.current) return;
     setIsExporting(true);
     try {
-      const dataUrl = await toPng(captureRef.current, {
-        pixelRatio: size.w / (size.w * displayScale),
-        cacheBust: true,
-      });
-      const res = await fetch(dataUrl);
+      const res = await fetch(buildApiUrl());
       const blob = await res.blob();
       await navigator.clipboard.write([
         new ClipboardItem({ "image/png": blob }),
@@ -292,7 +308,7 @@ function PushGenerator() {
           background: bg,
           width: size.w * displayScale,
           height: size.h * displayScale,
-          borderRadius: isApiMode ? 0 : 16,
+          borderRadius: 0,
           fontFamily: '"SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, "Helvetica Neue", sans-serif',
         }}
       >
@@ -305,7 +321,7 @@ function PushGenerator() {
         )}
 
         {/* Stack wrapper — holds ghost layers + main notification */}
-        <div className="relative w-[90%]" style={{ marginBottom: stacked ? 16 : 0 }}>
+        <div className="relative w-[94%]" style={{ marginBottom: stacked ? 16 : 0 }}>
           {/* Ghost layers (behind, only when stacked) */}
           {stacked && (
             <>
@@ -342,15 +358,24 @@ function PushGenerator() {
           {isRemote ? (
             /* ── Remote Push: large round avatar + small app icon badge bottom-right ── */
             <div
-              className="relative rounded-[42px] px-4 py-3.5 flex gap-4 items-center"
+              className="relative rounded-[42px] pl-[24px] pr-[28px] py-3.5 flex gap-4 items-center"
               style={{
-                background: "rgba(255, 255, 255, 0.18)",
+                background: "rgba(255, 255, 255, 0.09)",
                 backdropFilter: "blur(60px)",
                 WebkitBackdropFilter: "blur(60px)",
                 boxShadow: "inset 0 0.5px 0 rgba(255,255,255,0.12)",
-                border: "2px solid rgba(255,255,255,0.12)",
+                border: "2px solid transparent",
               }}
             >
+              {/* Gradient border overlay */}
+              <div className="absolute inset-0 rounded-[42px] pointer-events-none" style={{
+                background: "linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%) border-box",
+                mask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
+                WebkitMask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
+                maskComposite: "exclude",
+                WebkitMaskComposite: "xor",
+                border: "2px solid transparent",
+              } as React.CSSProperties} />
               {/* Avatar with app icon badge */}
               <div className="relative flex-shrink-0">
                 {/* Large round avatar (sender) */}
@@ -402,41 +427,50 @@ function PushGenerator() {
               </div>
 
               <div className="flex-1 min-w-0">
-                <div className="flex items-baseline justify-between gap-3">
+                <div className="flex items-baseline justify-between gap-3 mb-[-2px]">
                   <Text
                     value={title}
                     onChange={setTitle}
-                    className="text-[24px] text-white leading-snug"
+                    className="text-[27px] text-white leading-tight"
                     style={{ fontWeight: 600 }}
                   />
                   <Text
                     value={timeAgo}
                     onChange={setTimeAgo}
                     className="text-[24px] flex-shrink-0"
-                    style={{ color: "rgba(255,255,255,0.48)", mixBlendMode: "plus-lighter" } as React.CSSProperties}
+                    style={{ color: "rgba(255,255,255,0.50)", mixBlendMode: "plus-lighter" } as React.CSSProperties}
                   />
                 </div>
                 <Text
                   value={body}
                   onChange={setBody}
                   tag="p"
-                  className="text-[24px] text-white leading-snug block"
-                  style={{ fontWeight: 400 }}
+                  className="text-[27px] text-white block"
+                  style={{ fontWeight: 400, lineHeight: 1.15 }}
                 />
               </div>
             </div>
           ) : (
             /* ── Local Push: only the app icon ── */
             <div
-              className="relative rounded-[42px] px-4 py-3.5 flex gap-4 items-center"
+              className="relative rounded-[42px] pl-[24px] pr-[28px] py-3.5 flex gap-4 items-center"
               style={{
-                background: "rgba(255, 255, 255, 0.18)",
+                background: "rgba(255, 255, 255, 0.09)",
                 backdropFilter: "blur(60px)",
                 WebkitBackdropFilter: "blur(60px)",
                 boxShadow: "inset 0 0.5px 0 rgba(255,255,255,0.12)",
-                border: "2px solid rgba(255,255,255,0.12)",
+                border: "2px solid transparent",
               }}
             >
+              {/* Gradient border overlay */}
+              <div className="absolute inset-0 rounded-[42px] pointer-events-none" style={{
+                background: "linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%) border-box",
+                mask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
+                WebkitMask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
+                maskComposite: "exclude",
+                WebkitMaskComposite: "xor",
+                border: "2px solid transparent",
+              } as React.CSSProperties} />
               {isApiMode ? (
                 <div
                   className="w-[64px] h-[64px] rounded-[19px] flex items-center justify-center flex-shrink-0 overflow-hidden bg-white/10"
@@ -463,26 +497,26 @@ function PushGenerator() {
               )}
 
               <div className="flex-1 min-w-0">
-                <div className="flex items-baseline justify-between gap-3">
+                <div className="flex items-baseline justify-between gap-3 mb-[-2px]">
                   <Text
                     value={title}
                     onChange={setTitle}
-                    className="text-[24px] text-white leading-snug"
+                    className="text-[27px] text-white leading-tight"
                     style={{ fontWeight: 600 }}
                   />
                   <Text
                     value={timeAgo}
                     onChange={setTimeAgo}
                     className="text-[24px] flex-shrink-0"
-                    style={{ color: "rgba(255,255,255,0.48)", mixBlendMode: "plus-lighter" } as React.CSSProperties}
+                    style={{ color: "rgba(255,255,255,0.50)", mixBlendMode: "plus-lighter" } as React.CSSProperties}
                   />
                 </div>
                 <Text
                   value={body}
                   onChange={setBody}
                   tag="p"
-                  className="text-[24px] text-white leading-snug block"
-                  style={{ fontWeight: 400 }}
+                  className="text-[27px] text-white block"
+                  style={{ fontWeight: 400, lineHeight: 1.15 }}
                 />
               </div>
             </div>
