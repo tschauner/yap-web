@@ -8,19 +8,19 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Yap — Your Personal Nagging Agency",
-  description: "Pick an agent. Set a mission. Get nagged until it's done. The motivation app that won't shut up.",
+  title: "Yap — 12 AI Agents. 1 Mission. 0 Mercy.",
+  description: "Your mom, your ex, and 10 more vs. your to-do list. The productivity app that guilt-trips you into getting things done.",
   openGraph: {
-    title: "Yap — Your Personal Nagging Agency",
-    description: "Pick an agent. Set a mission. Get nagged until it's done.",
+    title: "Yap — 12 AI Agents. 1 Mission. 0 Mercy.",
+    description: "Your mom, your ex, and 10 more vs. your to-do list.",
     url: "https://yap.fail",
     siteName: "Yap",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yap — Your Personal Nagging Agency",
-    description: "Pick an agent. Set a mission. Get nagged until it's done.",
+    title: "Yap — 12 AI Agents. 1 Mission. 0 Mercy.",
+    description: "Your mom, your ex, and 10 more vs. your to-do list.",
   },
 };
 
