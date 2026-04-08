@@ -40,11 +40,11 @@ export default function Hero() {
         className="relative z-10 text-center max-w-[600px] mb-10"
       >
         <h1 className="text-4xl md:text-6xl font-bold leading-[1.1] tracking-[-1.5px] mb-4 text-white">
-          The motivation app<br />that won&apos;t shut up.
+          12 AI agents.<br />1 mission. 0 mercy.
         </h1>
 
-        <p className="text-base md:text-lg text-[#777] max-w-[440px] mx-auto md:whitespace-nowrap">
-          Pick an agent. Set a mission. Get yapped at until it&apos;s done.
+        <p className="text-base md:text-lg text-[#777] max-w-[500px] mx-auto">
+          Your mom, your ex, and 10 more vs. your to-do list.
         </p>
       </motion.div>
 
