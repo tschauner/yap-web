@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import chromium from "@sparticuz/chromium";
+import chromium from "@sparticuz/chromium-min";
 import puppeteer from "puppeteer-core";
 import { existsSync } from "fs";
 
 // Vercel serverless: max 60s, 1024MB
 export const maxDuration = 30;
+
+// Remote chromium pack for Vercel (matches @sparticuz/chromium-min@143)
+const CHROMIUM_PACK =
+  "https://github.com/nichochar/chromium-min-pack/releases/download/v143.0.4/chromium-v143.0.4-pack.tar";
 
 // Local Chrome paths by OS
 const LOCAL_CHROME_PATHS = [
@@ -19,10 +23,8 @@ async function getExecPath(): Promise<string> {
   for (const p of LOCAL_CHROME_PATHS) {
     if (existsSync(p)) return p;
   }
-  // Production (Vercel): use sparticuz chromium
-  const p = await chromium.executablePath();
-  if (p) return p;
-  throw new Error("No Chrome/Chromium found");
+  // Production (Vercel): download chromium from CDN
+  return await chromium.executablePath(CHROMIUM_PACK);
 }
 
 function isVercel(): boolean {
