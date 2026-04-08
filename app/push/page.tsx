@@ -2,6 +2,7 @@
 
 import { useState, useRef, useCallback, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import { toPng } from "html-to-image";
 
 // ─── Size presets ───────────────────────────────────────────────────────────────
 
@@ -224,9 +225,8 @@ function PushGenerator() {
 
   const size = SIZE_PRESETS[sizeIdx];
 
-  // Both API mode and interactive mode use the same visual scale
-  // so that the layout is identical. Puppeteer uses deviceScaleFactor to upscale.
-  const displayScale = Math.min(680 / size.w, 1);
+  // In API mode, render at full resolution (1:1). In interactive mode, scale down to 680px max.
+  const displayScale = isApiMode ? 1 : Math.min(680 / size.w, 1);
 
   // Signal to Puppeteer that we're ready
   const [ready, setReady] = useState(false);
@@ -234,50 +234,34 @@ function PushGenerator() {
     setReady(true);
   }, []);
 
-  // Build the current state as query params for the screenshot API
-  const buildApiUrl = useCallback(() => {
-    const params = new URLSearchParams();
-    params.set("title", title);
-    params.set("body", body);
-    params.set("time", timeAgo);
-    params.set("color", activeColor);
-    params.set("size", size.name.toLowerCase());
-    params.set("type", pushStyle);
-    if (stacked) params.set("stack", "true");
-    // Only pass avatar/icon if they're built-in agent paths (not data URIs)
-    if (avatarUrl && !avatarUrl.startsWith("data:")) {
-      const match = avatarUrl.match(/\/agents\/(.+)\.png$/);
-      if (match) params.set("avatar", match[1]);
-    }
-    if (appIconUrl && !appIconUrl.startsWith("data:")) {
-      const match = appIconUrl.match(/\/([^/]+)\.png$/);
-      if (match) params.set("icon", appIconUrl);
-    }
-    return `/api/push?${params.toString()}`;
-  }, [title, body, timeAgo, activeColor, size, pushStyle, stacked, avatarUrl, appIconUrl]);
-
   const handleDownload = useCallback(async () => {
+    if (!captureRef.current) return;
     setIsExporting(true);
     try {
-      const res = await fetch(buildApiUrl());
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
+      const dataUrl = await toPng(captureRef.current, {
+        pixelRatio: size.w / (size.w * displayScale),
+        cacheBust: true,
+      });
       const link = document.createElement("a");
       link.download = `push-${size.name.toLowerCase()}-${Date.now()}.png`;
-      link.href = url;
+      link.href = dataUrl;
       link.click();
-      URL.revokeObjectURL(url);
     } catch (err) {
       console.error("Export failed:", err);
     } finally {
       setIsExporting(false);
     }
-  }, [size, buildApiUrl]);
+  }, [size, displayScale]);
 
   const handleCopy = useCallback(async () => {
+    if (!captureRef.current) return;
     setIsExporting(true);
     try {
-      const res = await fetch(buildApiUrl());
+      const dataUrl = await toPng(captureRef.current, {
+        pixelRatio: size.w / (size.w * displayScale),
+        cacheBust: true,
+      });
+      const res = await fetch(dataUrl);
       const blob = await res.blob();
       await navigator.clipboard.write([
         new ClipboardItem({ "image/png": blob }),

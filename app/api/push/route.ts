@@ -61,11 +61,12 @@ export async function GET(req: NextRequest) {
   const viewH = Math.round(size.h * viewScale);
   const dpr = size.w / viewW;  // e.g. 1200/680 ≈ 1.76
 
-  // Resolve base URL from the incoming request (works for both local + Vercel)
-  const baseUrl = req.nextUrl.origin;
+  // Resolve base URL
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL ??
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
   const pageUrl = `${baseUrl}/push?${params.toString()}`;
-  console.log("[push-api] navigating to:", pageUrl);
 
   let browser;
   try {
