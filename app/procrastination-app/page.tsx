@@ -22,42 +22,36 @@ export const metadata = {
 const testimonials = [
   {
     agent: "Mom",
-    emoji: "🫵",
     avatar: "/agents/mom.png",
     quote:
       "You've been 'about to start' for three hours. Mrs. Henderson's daughter finished her entire thesis today. I'm just saying.",
   },
   {
     agent: "The Ex",
-    emoji: "💔",
     avatar: "/agents/ex.png",
     quote:
       "You procrastinating? Wow. Shocked. This is my shocked face. Remember when you said you'd 'definitely call back'? Same energy.",
   },
   {
     agent: "Drill Sergeant",
-    emoji: "🪖",
     avatar: "/agents/drill.png",
     quote:
       "THAT CURSOR HAS BEEN BLINKING ON THE SAME LINE FOR 47 MINUTES. ARE YOU WRITING A REPORT OR A RANSOM NOTE?!",
   },
   {
     agent: "Therapist",
-    emoji: "🛋️",
     avatar: "/agents/therapist.png",
     quote:
       "Let's explore why you opened Instagram instead of the spreadsheet. What were you hoping to find there that the spreadsheet couldn't give you?",
   },
   {
     agent: "The Colleague",
-    emoji: "😊",
-    avatar: "/agents/passiveAggressiveColleague.png",
+    avatar: "/agents/colleague.png",
     quote:
       "Oh no, take your time! I already finished my part. And Karen's. And the presentation. But you do you 🙂",
   },
   {
     agent: "Grandma",
-    emoji: "👵",
     avatar: "/agents/grandma.png",
     quote:
       "Your grandfather built a house by hand in 1962. You can't even open a Word document. But I still love you, sweetheart.",

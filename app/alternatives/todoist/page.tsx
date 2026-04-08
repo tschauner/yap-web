@@ -22,42 +22,36 @@ export const metadata = {
 const testimonials = [
   {
     agent: "Mom",
-    emoji: "🫵",
     quote:
       "A to-do list? That's cute. You know what else was on your to-do list? Calling me back. THREE WEEKS AGO. But sure, add another checkbox, sweetie.",
     avatar: "/agents/mom.png",
   },
   {
     agent: "Drill Sergeant",
-    emoji: "🪖",
     quote:
       "YOUR TO-DO LIST HAS 47 ITEMS AND YOU'VE COMPLETED TWO. ONE OF THEM WAS 'MAKE TO-DO LIST.' THAT DOES NOT COUNT, SOLDIER.",
     avatar: "/agents/drill.png",
   },
   {
     agent: "The Ex",
-    emoji: "💔",
     quote:
       "Oh, you're switching apps again? You switched relationship counselors three times too. Maybe the app isn't the problem?",
     avatar: "/agents/ex.png",
   },
   {
     agent: "Boss",
-    emoji: "👔",
     quote:
       "Quick sync: I noticed you moved 'finish presentation' to tomorrow. For the fourth time. I'm sure the client will understand. Per my last notification.",
     avatar: "/agents/boss.png",
   },
   {
     agent: "The Colleague",
-    emoji: "😊",
     quote:
       "Oh, you use Todoist? That's so organized of you! I just... do things? When they need doing? But no, a list is great too. Really. 🙂",
-    avatar: "/agents/passiveAggressiveColleague.png",
+    avatar: "/agents/colleague.png",
   },
   {
     agent: "Grandma",
-    emoji: "👵",
     quote:
       "In my day we didn't have apps. We just did things. Or Grandpa gave us that look. You know the look. Imagine that, but on your phone.",
     avatar: "/agents/grandma.png",

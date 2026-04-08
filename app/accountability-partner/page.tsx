@@ -22,42 +22,36 @@ export const metadata = {
 const testimonials = [
   {
     agent: "Boss",
-    emoji: "👔",
     quote:
       "Per my last notification: the deliverable is overdue. I've CC'd your conscience. Regards.",
     avatar: "/agents/boss.png",
   },
   {
     agent: "Mom",
-    emoji: "🫵",
     quote:
       "An accountability partner? I've been your accountability partner for 28 years. You just stopped answering my calls.",
     avatar: "/agents/mom.png",
   },
   {
     agent: "Best Friend",
-    emoji: "🫶",
     quote:
       "bro i literally watched you set this deadline and then immediately open twitter. i have screenshots. don't test me 💀",
-    avatar: "/agents/bestFriend.png",
+    avatar: "/agents/bestfriend.png",
   },
   {
     agent: "The Theorist",
-    emoji: "🛸",
     quote:
       "Traditional accountability partners are COMPROMISED. They tell you 'it's okay' when it ISN'T. I will never lie to you. The TRUTH is you're behind schedule.",
-    avatar: "/agents/conspiracyTheorist.png",
+    avatar: "/agents/theorist.png",
   },
   {
     agent: "The Ex",
-    emoji: "💔",
     quote:
       "You want someone to hold you accountable? Interesting. That's literally all I asked for and you said I was 'too much.' But sure, pay an app for it.",
     avatar: "/agents/ex.png",
   },
   {
     agent: "Therapist",
-    emoji: "🛋️",
     quote:
       "The fact that you need an external system to follow through — let's sit with that. What does it say about how you relate to your own commitments?",
     avatar: "/agents/therapist.png",
