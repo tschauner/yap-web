@@ -225,8 +225,17 @@ function PushGenerator() {
 
   const size = SIZE_PRESETS[sizeIdx];
 
-  // In API mode, render at full resolution (1:1). In interactive mode, scale down to 680px max.
-  const displayScale = isApiMode ? 1 : Math.min(680 / size.w, 1);
+  // In API mode, render at full resolution (1:1). In interactive mode, scale to fit viewport.
+  const [viewportW, setViewportW] = useState(680);
+  useEffect(() => {
+    const update = () => setViewportW(window.innerWidth);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+  // On mobile, leave 32px horizontal padding (16px each side)
+  const maxPreviewW = Math.min(viewportW - 32, 680);
+  const displayScale = isApiMode ? 1 : Math.min(maxPreviewW / size.w, 1);
 
   // Signal to Puppeteer that we're ready
   const [ready, setReady] = useState(false);
@@ -287,7 +296,7 @@ function PushGenerator() {
       <div
         ref={captureRef}
         id="capture"
-        className="relative flex items-center justify-center overflow-hidden"
+        className="relative flex items-center justify-center"
         style={{
           background: bg,
           width: size.w * displayScale,
@@ -314,8 +323,6 @@ function PushGenerator() {
                 className="absolute inset-x-0 bottom-0 rounded-[42px] h-full"
                 style={{
                   background: "rgba(255, 255, 255, 0.12)",
-                  backdropFilter: "blur(60px)",
-                  WebkitBackdropFilter: "blur(60px)",
                   border: "0.5px solid rgba(255,255,255,0.08)",
                   transform: "scale(0.95) translateY(14px)",
                   transformOrigin: "top center",
@@ -327,8 +334,6 @@ function PushGenerator() {
                 className="absolute inset-x-0 bottom-0 rounded-[42px] h-full"
                 style={{
                   background: "rgba(255, 255, 255, 0.08)",
-                  backdropFilter: "blur(60px)",
-                  WebkitBackdropFilter: "blur(60px)",
                   border: "0.5px solid rgba(255,255,255,0.06)",
                   transform: "scale(0.90) translateY(28px)",
                   transformOrigin: "top center",
@@ -344,22 +349,13 @@ function PushGenerator() {
             <div
               className="relative rounded-[42px] pl-[24px] pr-[28px] py-3.5 flex gap-4 items-center"
               style={{
-                background: "rgba(255, 255, 255, 0.09)",
-                backdropFilter: "blur(60px)",
-                WebkitBackdropFilter: "blur(60px)",
+                background: "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.06) 100%)",
                 boxShadow: "inset 0 0.5px 0 rgba(255,255,255,0.12)",
-                border: "2px solid transparent",
+                border: "1px solid rgba(255,255,255,0.18)",
+                borderTopColor: "rgba(255,255,255,0.25)",
+                borderBottomColor: "rgba(255,255,255,0.06)",
               }}
             >
-              {/* Gradient border overlay */}
-              <div className="absolute inset-0 rounded-[42px] pointer-events-none" style={{
-                background: "linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%) border-box",
-                mask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
-                WebkitMask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
-                maskComposite: "exclude",
-                WebkitMaskComposite: "xor",
-                border: "2px solid transparent",
-              } as React.CSSProperties} />
               {/* Avatar with app icon badge */}
               <div className="relative flex-shrink-0">
                 {/* Large round avatar (sender) */}
@@ -439,22 +435,13 @@ function PushGenerator() {
             <div
               className="relative rounded-[42px] pl-[24px] pr-[28px] py-3.5 flex gap-4 items-center"
               style={{
-                background: "rgba(255, 255, 255, 0.09)",
-                backdropFilter: "blur(60px)",
-                WebkitBackdropFilter: "blur(60px)",
+                background: "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.06) 100%)",
                 boxShadow: "inset 0 0.5px 0 rgba(255,255,255,0.12)",
-                border: "2px solid transparent",
+                border: "1px solid rgba(255,255,255,0.18)",
+                borderTopColor: "rgba(255,255,255,0.25)",
+                borderBottomColor: "rgba(255,255,255,0.06)",
               }}
             >
-              {/* Gradient border overlay */}
-              <div className="absolute inset-0 rounded-[42px] pointer-events-none" style={{
-                background: "linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%) border-box",
-                mask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
-                WebkitMask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
-                maskComposite: "exclude",
-                WebkitMaskComposite: "xor",
-                border: "2px solid transparent",
-              } as React.CSSProperties} />
               {isApiMode ? (
                 <div
                   className="w-[64px] h-[64px] rounded-[19px] flex items-center justify-center flex-shrink-0 overflow-hidden bg-white/10"
@@ -510,7 +497,7 @@ function PushGenerator() {
 
       {/* ─── Floating Toolbar (hidden in API mode) ─────────── */}
       {!isApiMode && (
-        <div className="mt-6 relative flex items-center gap-1 px-2 py-2 rounded-2xl bg-white/[0.06] border border-white/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+        <div className="mt-6 relative flex items-center gap-1 px-2 py-2 rounded-2xl bg-white/[0.06] border border-white/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] flex-wrap justify-center">
 
           {/* Copy */}
           <button
