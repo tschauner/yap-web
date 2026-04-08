@@ -351,9 +351,9 @@ function PushGenerator() {
               style={{
                 background: "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.06) 100%)",
                 boxShadow: "inset 0 0.5px 0 rgba(255,255,255,0.12)",
-                border: "2.5px solid rgba(255,255,255,0.25)",
-                borderTopColor: "rgba(255,255,255,0.35)",
-                borderBottomColor: "rgba(255,255,255,0.10)",
+                border: "1.7px solid rgba(255,255,255,0.22)",
+                borderTopColor: "rgba(255,255,255,0.30)",
+                borderBottomColor: "rgba(255,255,255,0.08)",
               }}
             >
               {/* Avatar with app icon badge */}
@@ -437,9 +437,9 @@ function PushGenerator() {
               style={{
                 background: "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.06) 100%)",
                 boxShadow: "inset 0 0.5px 0 rgba(255,255,255,0.12)",
-                border: "2.5px solid rgba(255,255,255,0.25)",
-                borderTopColor: "rgba(255,255,255,0.35)",
-                borderBottomColor: "rgba(255,255,255,0.10)",
+                border: "1.7px solid rgba(255,255,255,0.22)",
+                borderTopColor: "rgba(255,255,255,0.30)",
+                borderBottomColor: "rgba(255,255,255,0.08)",
               }}
             >
               {isApiMode ? (
