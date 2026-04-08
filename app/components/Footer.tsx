@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#111111] border-t border-white/[0.06]">
       <div className="max-w-[1100px] mx-auto px-6 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_1fr] gap-12 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_1fr_1fr] gap-12 md:gap-8">
           {/* Brand */}
           <div>
             <Link href="/" className="flex items-center gap-2.5 mb-4">
@@ -94,6 +94,31 @@ export default function Footer() {
               className="text-sm text-[#888] hover:text-white transition-colors"
             >
               Press Kit
+            </Link>
+          </div>
+
+          {/* Learn More */}
+          <div className="flex flex-col gap-3">
+            <span className="text-sm font-semibold text-white mb-1">
+              Learn More
+            </span>
+            <Link
+              href="/procrastination-app"
+              className="text-sm text-[#888] hover:text-white transition-colors"
+            >
+              Procrastination App
+            </Link>
+            <Link
+              href="/accountability-partner"
+              className="text-sm text-[#888] hover:text-white transition-colors"
+            >
+              Accountability Partner
+            </Link>
+            <Link
+              href="/alternatives/todoist"
+              className="text-sm text-[#888] hover:text-white transition-colors"
+            >
+              Todoist Alternative
             </Link>
           </div>
         </div>
