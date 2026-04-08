@@ -347,13 +347,13 @@ function PushGenerator() {
           {isRemote ? (
             /* ── Remote Push: large round avatar + small app icon badge bottom-right ── */
             <div
-              className="relative rounded-[42px] pl-[24px] pr-[28px] py-3.5 flex gap-4 items-center"
+              className="relative rounded-[42px] pl-[24px] pr-[28px] py-[18px] flex gap-4 items-center"
               style={{
                 background: "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.06) 100%)",
                 boxShadow: "inset 0 0.5px 0 rgba(255,255,255,0.12)",
-                border: "1px solid rgba(255,255,255,0.18)",
-                borderTopColor: "rgba(255,255,255,0.25)",
-                borderBottomColor: "rgba(255,255,255,0.06)",
+                border: "2.5px solid rgba(255,255,255,0.25)",
+                borderTopColor: "rgba(255,255,255,0.35)",
+                borderBottomColor: "rgba(255,255,255,0.10)",
               }}
             >
               {/* Avatar with app icon badge */}
@@ -433,13 +433,13 @@ function PushGenerator() {
           ) : (
             /* ── Local Push: only the app icon ── */
             <div
-              className="relative rounded-[42px] pl-[24px] pr-[28px] py-3.5 flex gap-4 items-center"
+              className="relative rounded-[42px] pl-[24px] pr-[28px] py-[18px] flex gap-4 items-center"
               style={{
                 background: "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.06) 100%)",
                 boxShadow: "inset 0 0.5px 0 rgba(255,255,255,0.12)",
-                border: "1px solid rgba(255,255,255,0.18)",
-                borderTopColor: "rgba(255,255,255,0.25)",
-                borderBottomColor: "rgba(255,255,255,0.06)",
+                border: "2.5px solid rgba(255,255,255,0.25)",
+                borderTopColor: "rgba(255,255,255,0.35)",
+                borderBottomColor: "rgba(255,255,255,0.10)",
               }}
             >
               {isApiMode ? (
