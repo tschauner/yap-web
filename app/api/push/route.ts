@@ -61,10 +61,11 @@ export async function GET(req: NextRequest) {
   const viewH = Math.round(size.h * viewScale);
   const dpr = size.w / viewW;  // e.g. 1200/680 ≈ 1.76
 
-  // Resolve base URL
+  // Resolve base URL — MUST use the production domain, not VERCEL_URL
+  // (deployment-specific URLs are behind Vercel Deployment Protection → 401)
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL ??
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+    req.nextUrl.origin;
 
   const pageUrl = `${baseUrl}/push?${params.toString()}`;
 
