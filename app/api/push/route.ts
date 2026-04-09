@@ -8,7 +8,7 @@ export const maxDuration = 30;
 
 // Remote chromium pack for Vercel (matches @sparticuz/chromium-min@143)
 const CHROMIUM_PACK =
-  "https://github.com/nichochar/chromium-min-pack/releases/download/v143.0.4/chromium-v143.0.4-pack.tar";
+  "https://github.com/Sparticuz/chromium/releases/download/v143.0.4/chromium-v143.0.4-pack.x64.tar";
 
 // Local Chrome paths by OS
 const LOCAL_CHROME_PATHS = [
