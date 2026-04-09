@@ -80,18 +80,50 @@ export async function GET(req: NextRequest) {
     });
 
     const page = await browser.newPage();
+
+    // Capture browser console + errors for debugging
+    const logs: string[] = [];
+    page.on("console", (msg) => logs.push(`[${msg.type()}] ${msg.text()}`));
+    page.on("pageerror", (err) => logs.push(`[PAGE_ERROR] ${err.message}`));
+    page.on("requestfailed", (req) =>
+      logs.push(`[REQ_FAIL] ${req.url()} — ${req.failure()?.errorText}`)
+    );
+
+    console.log("[push-api] Navigating to:", pageUrl);
     await page.goto(pageUrl, { waitUntil: "networkidle0", timeout: 15000 });
 
-    // Wait for React to hydrate
-    await page.waitForSelector('[data-ready="true"]', { timeout: 10000 });
-    // Small extra delay for fonts/images to settle
-    await new Promise((r) => setTimeout(r, 500));
+    // Wait for React to hydrate and set data-ready="true"
+    let hydrated = false;
+    try {
+      await page.waitForSelector('[data-ready="true"]', { timeout: 8000 });
+      hydrated = true;
+    } catch {
+      console.warn("[push-api] data-ready timeout — checking page state...");
+      // Check what the page actually rendered
+      const html = await page.evaluate(() => document.documentElement.outerHTML.slice(0, 2000));
+      console.warn("[push-api] Page HTML (first 2000 chars):", html);
+      console.warn("[push-api] Browser logs:", logs.join("\n"));
+    }
 
-    // Screenshot just the capture element
+    // Even if hydration signal missed, check if #capture exists
     const el = await page.$("#capture");
     if (!el) {
-      return NextResponse.json({ error: "Capture element not found" }, { status: 500 });
+      // If no #capture, the page didn't render — return debug info
+      const html = await page.evaluate(() => document.documentElement.outerHTML.slice(0, 3000));
+      return NextResponse.json(
+        {
+          error: "Capture element not found (React may not have hydrated)",
+          hydrated,
+          pageUrl,
+          logs,
+          html,
+        },
+        { status: 500 }
+      );
     }
+
+    // Extra delay for fonts/images to settle
+    await new Promise((r) => setTimeout(r, hydrated ? 500 : 2000));
 
     const png = await el.screenshot({ type: "png" });
 
