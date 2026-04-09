@@ -83,10 +83,11 @@ export async function GET(req: NextRequest) {
 
     // Capture browser console + errors for debugging
     const logs: string[] = [];
-    page.on("console", (msg) => logs.push(`[${msg.type()}] ${msg.text()}`));
-    page.on("pageerror", (err) => logs.push(`[PAGE_ERROR] ${err.message}`));
-    page.on("requestfailed", (req) =>
-      logs.push(`[REQ_FAIL] ${req.url()} — ${req.failure()?.errorText}`)
+    page.on("console", (msg: { type: () => string; text: () => string }) =>
+      logs.push(`[${msg.type()}] ${msg.text()}`)
+    );
+    page.on("pageerror", (err: { message: string }) =>
+      logs.push(`[PAGE_ERROR] ${err.message}`)
     );
 
     console.log("[push-api] Navigating to:", pageUrl);
@@ -97,19 +98,27 @@ export async function GET(req: NextRequest) {
     try {
       await page.waitForSelector('[data-ready="true"]', { timeout: 8000 });
       hydrated = true;
-    } catch {
-      console.warn("[push-api] data-ready timeout — checking page state...");
-      // Check what the page actually rendered
-      const html = await page.evaluate(() => document.documentElement.outerHTML.slice(0, 2000));
-      console.warn("[push-api] Page HTML (first 2000 chars):", html);
-      console.warn("[push-api] Browser logs:", logs.join("\n"));
+    } catch (_e) {
+      console.warn("[push-api] data-ready timeout — proceeding anyway");
+      try {
+        const html = await page.evaluate(() => document.documentElement.outerHTML.slice(0, 2000));
+        console.warn("[push-api] Page HTML:", html);
+        logs.push(`[DEBUG_HTML] ${html}`);
+      } catch (_e2) {
+        logs.push("[DEBUG] Could not evaluate page HTML");
+      }
     }
 
     // Even if hydration signal missed, check if #capture exists
     const el = await page.$("#capture");
     if (!el) {
       // If no #capture, the page didn't render — return debug info
-      const html = await page.evaluate(() => document.documentElement.outerHTML.slice(0, 3000));
+      let html = "";
+      try {
+        html = await page.evaluate(() => document.documentElement.outerHTML.slice(0, 3000));
+      } catch (_e3) {
+        html = "(could not read page HTML)";
+      }
       return NextResponse.json(
         {
           error: "Capture element not found (React may not have hydrated)",
