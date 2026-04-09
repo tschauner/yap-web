@@ -83,12 +83,8 @@ export async function GET(req: NextRequest) {
 
     // Capture browser console + errors for debugging
     const logs: string[] = [];
-    page.on("console", (msg: { type: () => string; text: () => string }) =>
-      logs.push(`[${msg.type()}] ${msg.text()}`)
-    );
-    page.on("pageerror", (err: { message: string }) =>
-      logs.push(`[PAGE_ERROR] ${err.message}`)
-    );
+    page.on("console", (msg) => logs.push(`[${msg.type()}] ${msg.text()}`));
+    page.on("pageerror", (err) => logs.push(`[PAGE_ERROR] ${String(err)}`));
 
     console.log("[push-api] Navigating to:", pageUrl);
     await page.goto(pageUrl, { waitUntil: "networkidle0", timeout: 15000 });
