@@ -167,7 +167,7 @@ function PushGenerator() {
   const qIcon = searchParams.get("icon");
 
   // Available agent avatars — shorthand names resolve to /agents/<name>.png
-  // mom, dad, boss, ex, drill, grandma, therapist, theorist, ramsay, gymbro, bestfriend, colleague
+  // mom, dad, boss, ex, drill, grandma, therapist, theorist, chef, gymbro, bestfriend, colleague
   const resolveAvatar = (v: string | null, fallback: string) => {
     if (!v) return fallback;
     if (v.startsWith("/") || v.startsWith("http")) return v;
