@@ -233,9 +233,10 @@ function PushGenerator() {
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
-  // On mobile, leave 32px horizontal padding (16px each side)
-  const maxPreviewW = Math.min(viewportW - 32, 680);
-  const displayScale = isApiMode ? 1 : Math.min(maxPreviewW / size.w, 1);
+  // API mode: use full viewport width (no padding needed)
+  // Interactive: leave 32px horizontal padding (16px each side)
+  const maxPreviewW = isApiMode ? viewportW : Math.min(viewportW - 32, 680);
+  const displayScale = Math.min(maxPreviewW / size.w, 1);
 
   // Signal to Puppeteer that we're ready
   const [ready, setReady] = useState(false);

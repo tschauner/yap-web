@@ -53,12 +53,13 @@ export async function GET(req: NextRequest) {
   const sizeKey = (searchParams.get("size") ?? "twitter").toLowerCase();
   const size = sizeMap[sizeKey] ?? sizeMap.twitter;
 
-  // Render at full target resolution with DPR=1.
-  // The /push page uses displayScale=1 in API mode, so the viewport
-  // must match the target size exactly.
-  const viewW = size.w;
-  const viewH = size.h;
-  const dpr = 1;
+  // Render at a compact viewport (like the interactive preview) and use
+  // deviceScaleFactor so the element screenshot comes out at full resolution.
+  const PREVIEW_W = 680;
+  const scale = PREVIEW_W / size.w;           // 680/1200 ≈ 0.567
+  const viewW = PREVIEW_W;
+  const viewH = Math.round(size.h * scale);   // 675*0.567 ≈ 383
+  const dpr = size.w / PREVIEW_W;             // 1200/680 ≈ 1.765
 
   // Resolve base URL — MUST use the production domain, not VERCEL_URL
   // (deployment-specific URLs are behind Vercel Deployment Protection → 401)
